@@ -39,6 +39,7 @@ function startOver() {
     level = 0;
     gameStarted = 0;
     gamePattern = [];
+    userClickedPattern = [];
 }
 
 //Audio events.
