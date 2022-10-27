@@ -1,13 +1,14 @@
 body {
   text-align: center;
   background-color: #011F3F;
+  color: #FEF2BF;
+  user-select: none;
+  font-family: 'Press Start 2P', cursive;
 }
 
 #level-title {
-  font-family: 'Press Start 2P', cursive;
   font-size: 3rem;
   margin:  5%;
-  color: #FEF2BF;
 }
 
 .container {
@@ -30,6 +31,11 @@ body {
 .game-over {
   background-color: red;
   opacity: 0.8;
+}
+
+.instructions {
+  margin: 60px 50px;
+  line-height: 2;
 }
 
 .red {
