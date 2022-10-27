@@ -26,8 +26,7 @@ function checkAnswer(currentLevel) {
         }
     } else {
         // If wrong.
-        let wrongSound = new Audio("sounds/wrong.mp3");
-        wrongSound.play();
+        playSound("wrong");
         $("body").addClass("game-over");
         setTimeout( () => { $("body").removeClass("game-over")}, 200);
         $("h1").html("Game Over, Press 'A' Key to Restart");
