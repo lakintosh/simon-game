@@ -1,7 +1,7 @@
 let gamePattern = [];
 let userClickedPattern = [];
 let buttonColors = ["red", "blue", "green", "yellow"];
-let gameStarted = 0;
+let isGameStarted = false;
 let level = 0;
 
 // Level generation events.
@@ -9,11 +9,37 @@ function nextSequence() {
     let randomChosenColor = buttonColors[Math.floor(Math.random() * 4)];
     gamePattern.push(randomChosenColor);
 
+    hideStartBtn(isGameStarted);
     animatePress(randomChosenColor);
     playSound(randomChosenColor);
     // Replaces the h1 with current level.
     $("h1").html(`Level ${level}`);
     level++;
+}
+
+// Start button event handlers
+$('.start-button').mouseover(function() {
+    $(this).html('Click me!');
+});
+
+$('.start-button').mouseout(function() {
+    $(this).html('START');
+});
+
+function hideStartBtn(isGameStarted) {
+    let startButton = $('.start-button');
+
+    if (isGameStarted === false) {
+        startButton.addClass('start-button-none');
+    }
+}
+
+function showStartBtn(isGameStarted) {
+    let startButton = $('.start-button');
+
+    if (isGameStarted === false) {
+        startButton.removeClass('start-button-none');
+    }
 }
 
 // Validates users choose.
@@ -29,14 +55,15 @@ function checkAnswer(currentLevel) {
         playSound("wrong");
         $("body").addClass("game-over");
         setTimeout( () => { $("body").removeClass("game-over")}, 200);
-        $("h1").html("Game Over, Press 'A' Key to Restart");
+        $("h1").html("Game Over, try again ;)");
         startOver();
+        showStartBtn(isGameStarted);
     }
 }
 
 function startOver() {
     level = 0;
-    gameStarted = 0;
+    isGameStarted = false;
     gamePattern = [];
     userClickedPattern = [];
 }
@@ -54,13 +81,11 @@ function animatePress(color) {
 }
 
 // Starts the game.
-$(document).keypress(function(event) {
-    if (event.key === 'a') {
-        if (gameStarted == false) {
-            nextSequence();
-            gameStarted++;
-        }
-    }
+$('.start-button').click(function() {
+   if (isGameStarted === false) {
+    nextSequence();
+    isGameStarted = true;
+   }
 });
 
 // User click events.
